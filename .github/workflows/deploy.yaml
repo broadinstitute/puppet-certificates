@@ -50,9 +50,6 @@ jobs:
       - name: 'Module build'
         run: 'bundle exec pdk build'
 
-      - name: 'Release prep'
-        run: 'bundle exec pdk release prep --skip-changelog --skip-documentation --force'
-
       - name: 'Publish package to Puppet Forge'
         env:
           PDK_FORGE_TOKEN: ${{ secrets.BLACKSMITH_FORGE_API_KEY }}
