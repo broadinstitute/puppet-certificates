@@ -23,10 +23,12 @@
 
 Configures SSL certificates and keys.
 
+This module is a rename of the original [broadinstitute/certs](https://forge.puppet.com/modules/broadinstitute/certs/) Forge module. All active development will happen in this module going forward.
+
 ## Module Description
 
-This module provides SSL certificate files required by Apache or other services via the certificates::site define.
-It can be used in conjunction with puppetlabs/apache's apache::vhost definitions to provide the ssl_cert and ssl_key files or any other service requiring SSL certificates.
+This module provides SSL certificate files required by Apache or other services via the `certificates::site` define.
+It can be used in conjunction with puppetlabs/apache's `apache::vhost` definitions to provide the ssl_cert and ssl_key files or any other service requiring SSL certificates.
 
 It can also be used independent of any Puppet-defined service that requires the files to exist on a managed node.
 
