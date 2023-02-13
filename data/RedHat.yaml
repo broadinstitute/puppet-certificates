@@ -1,5 +1,7 @@
 ---
+certificates::ca_path: '/etc/pki/tls/certs'
 certificates::cert_path: '/etc/pki/tls/certs'
+certificates::chain_path: '/etc/pki/tls/certs'
 certificates::key_path: '/etc/pki/tls/private'
 certificates::service: 'httpd'
 certificates::group: 'root'

@@ -1,5 +1,7 @@
 ---
+certificates::ca_path: '/usr/local/etc/apache24'
 certificates::cert_path: '/usr/local/etc/apache24'
+certificates::chain_path: '/usr/local/etc/apache24'
 certificates::key_path: '/usr/local/etc/apache24'
 certificates::service: 'apache24'
 certificates::group: 'wheel'

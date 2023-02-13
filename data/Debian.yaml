@@ -1,5 +1,7 @@
 ---
+certificates::ca_path: '/etc/ssl/certs'
 certificates::cert_path: '/etc/ssl/certs'
+certificates::chain_path: '/etc/ssl/certs'
 certificates::key_path: '/etc/ssl/private'
 certificates::service: 'apache2'
 certificates::group: 'root'

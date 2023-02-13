@@ -209,42 +209,42 @@
 #
 define certificates::site (
   Enum['present','absent'] $ensure                         = 'present',
-  Boolean $ca_cert                                         = $::certificates::ca_cert,
-  Optional[String] $ca_content                             = $::certificates::ca_content,
-  String $ca_ext                                           = $::certificates::ca_ext,
-  Optional[String] $ca_name                                = $::certificates::ca_name,
-  Stdlib::Absolutepath $ca_path                            = $::certificates::ca_path,
-  Boolean $cert_chain                                      = $::certificates::cert_chain,
-  Optional[String] $cert_content                           = $::certificates::cert_content,
-  String $cert_dir_mode                                    = $::certificates::cert_dir_mode,
-  String $cert_ext                                         = $::certificates::cert_ext,
-  String $cert_mode                                        = $::certificates::cert_mode,
-  Stdlib::Absolutepath $cert_path                          = $::certificates::cert_path,
-  Optional[String] $chain_content                          = $::certificates::chain_content,
-  String $chain_ext                                        = $::certificates::chain_ext,
-  Optional[String] $chain_name                             = $::certificates::chain_name,
-  Stdlib::Absolutepath $chain_path                         = $::certificates::chain_path,
+  Boolean $ca_cert                                         = $certificates::ca_cert,
+  Optional[String] $ca_content                             = $certificates::ca_content,
+  String $ca_ext                                           = $certificates::ca_ext,
+  Optional[String] $ca_name                                = $certificates::ca_name,
+  Stdlib::Absolutepath $ca_path                            = $certificates::ca_path,
+  Boolean $cert_chain                                      = $certificates::cert_chain,
+  Optional[String] $cert_content                           = $certificates::cert_content,
+  String $cert_dir_mode                                    = $certificates::cert_dir_mode,
+  String $cert_ext                                         = $certificates::cert_ext,
+  String $cert_mode                                        = $certificates::cert_mode,
+  Stdlib::Absolutepath $cert_path                          = $certificates::cert_path,
+  Optional[String] $chain_content                          = $certificates::chain_content,
+  String $chain_ext                                        = $certificates::chain_ext,
+  Optional[String] $chain_name                             = $certificates::chain_name,
+  Stdlib::Absolutepath $chain_path                         = $certificates::chain_path,
   Boolean $dhparam                                         = false,
   Optional[String] $dhparam_content                        = undef,
   Optional[Stdlib::Absolutepath] $dhparam_dir              = undef,
-  String $dhparam_file                                     = $::certificates::dhparam_file,
-  String $group                                            = $::certificates::group,
-  Optional[String] $key_content                            = $::certificates::key_content,
-  String $key_dir_mode                                     = $::certificates::key_dir_mode,
-  String $key_ext                                          = $::certificates::key_ext,
-  String $key_mode                                         = $::certificates::key_mode,
-  Stdlib::Absolutepath $key_path                           = $::certificates::key_path,
+  String $dhparam_file                                     = $certificates::dhparam_file,
+  String $group                                            = $certificates::group,
+  Optional[String] $key_content                            = $certificates::key_content,
+  String $key_dir_mode                                     = $certificates::key_dir_mode,
+  String $key_ext                                          = $certificates::key_ext,
+  String $key_mode                                         = $certificates::key_mode,
+  Stdlib::Absolutepath $key_path                           = $certificates::key_path,
   Boolean $merge_chain                                     = false,
   Boolean $merge_dhparam                                   = false,
   Boolean $merge_key                                       = false,
-  String $owner                                            = $::certificates::owner,
-  Optional[Variant[Array[String],Boolean,String]] $service = $::certificates::service,
+  String $owner                                            = $certificates::owner,
+  Optional[Variant[Array[String],Boolean,String]] $service = $certificates::service,
   Optional[String] $source_cert_name                       = undef,
   Optional[String] $source_key_name                        = undef,
-  Optional[String] $source_path                            = $::certificates::source_path,
-  Boolean $validate_x509                                   = $::certificates::validate_x509,
-  Optional[String] $ca_source_path                         = pick_default($::certificates::ca_source_path, $source_path),
-  Optional[String] $chain_source_path                      = pick_default($::certificates::chain_source_path, $source_path),
+  Optional[String] $source_path                            = $certificates::source_path,
+  Boolean $validate_x509                                   = $certificates::validate_x509,
+  Optional[String] $ca_source_path                         = pick_default($certificates::ca_source_path, $source_path),
+  Optional[String] $chain_source_path                      = pick_default($certificates::chain_source_path, $source_path),
 ) {
   # The base class must be included first because it is used by parameter defaults
   unless (defined(Class['certificates'])) {
@@ -381,13 +381,15 @@ define certificates::site (
     }
   }
 
-  ensure_resource('file', $key_path, {
-    ensure => 'directory',
-    backup => false,
-    owner  => $owner,
-    group  => $group,
-    mode   => $key_dir_mode,
-  })
+  ensure_resource('file', $key_path,
+    {
+      ensure => 'directory',
+      backup => false,
+      owner  => $owner,
+      group  => $group,
+      mode   => $key_dir_mode,
+    },
+  )
 
   if ($merge_key) {
     $substring_mode = $cert_mode[0,-3]
@@ -400,15 +402,15 @@ define certificates::site (
 
   if ($merge_chain or $merge_key or $merge_dhparam) {
     concat { "${name}_cert_merged":
-        ensure         => $ensure,
-        ensure_newline => true,
-        backup         => false,
-        path           => "${_cert_path}/${cert}",
-        owner          => $owner,
-        group          => $group,
-        mode           => $_cert_mode,
-        require        => File[$cert_path],
-        notify         => $service_notify,
+      ensure         => $ensure,
+      ensure_newline => true,
+      backup         => false,
+      path           => "${_cert_path}/${cert}",
+      owner          => $owner,
+      group          => $group,
+      mode           => $_cert_mode,
+      require        => File[$cert_path],
+      notify         => $service_notify,
     }
 
     concat::fragment { "${cert}_certificate":
@@ -456,14 +458,14 @@ define certificates::site (
     }
   } else {
     file { "${cert_path}/${cert}":
-        ensure  => $ensure,
-        source  => $cert_source,
-        content => $cert_content,
-        owner   => $owner,
-        group   => $group,
-        mode    => $cert_mode,
-        require => File[$cert_path],
-        notify  => $service_notify,
+      ensure  => $ensure,
+      source  => $cert_source,
+      content => $cert_content,
+      owner   => $owner,
+      group   => $group,
+      mode    => $cert_mode,
+      require => File[$cert_path],
+      notify  => $service_notify,
     }
   }
 
@@ -479,29 +481,33 @@ define certificates::site (
   }
 
   if ($cert_chain) {
-    ensure_resource('file', "${chain_path}/${chain}", {
-      ensure  => 'file',
-      source  => $chain_source,
-      content => $chain_content,
-      owner   => $owner,
-      group   => $group,
-      mode    => $cert_mode,
-      require => File[$chain_path],
-      notify  => $service_notify,
-    })
+    ensure_resource('file', "${chain_path}/${chain}",
+      {
+        ensure  => 'file',
+        source  => $chain_source,
+        content => $chain_content,
+        owner   => $owner,
+        group   => $group,
+        mode    => $cert_mode,
+        require => File[$chain_path],
+        notify  => $service_notify,
+      }
+    )
   }
 
   if ($ca_cert) {
-    ensure_resource('file', "${ca_path}/${ca}", {
-      ensure  => 'file',
-      source  => $ca_source,
-      content => $ca_content,
-      owner   => $owner,
-      group   => $group,
-      mode    => $cert_mode,
-      require => File[$ca_path],
-      notify  => $service_notify,
-    })
+    ensure_resource('file', "${ca_path}/${ca}",
+      {
+        ensure  => 'file',
+        source  => $ca_source,
+        content => $ca_content,
+        owner   => $owner,
+        group   => $group,
+        mode    => $cert_mode,
+        require => File[$ca_path],
+        notify  => $service_notify,
+      }
+    )
   }
 
   if ($dhparam) {
@@ -511,15 +517,17 @@ define certificates::site (
       $dhparam_path = "${cert_path}/${name}_${dhparam_file}"
     }
 
-    ensure_resource('file', $dhparam_path, {
-      ensure  => $ensure,
-      source  => $dhparam_source,
-      content => $dhparam_content,
-      owner   => $owner,
-      group   => $group,
-      mode    => $cert_mode,
-      require => File[$cert_path],
-      notify  => $service_notify,
-    })
+    ensure_resource('file', $dhparam_path,
+      {
+        ensure  => $ensure,
+        source  => $dhparam_source,
+        content => $dhparam_content,
+        owner   => $owner,
+        group   => $group,
+        mode    => $cert_mode,
+        require => File[$cert_path],
+        notify  => $service_notify,
+      }
+    )
   }
 }

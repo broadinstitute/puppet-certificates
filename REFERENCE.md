@@ -90,8 +90,6 @@ The extension of the CA certificate file.
 This sets the default globally for use by all `certificates::site` resources.
 Optional value. (default: 'crt').
 
-Default value: `lookup('certificates::cert_ext')`
-
 ##### <a name="-certificates--ca_name"></a>`ca_name`
 
 Data type: `Optional[String]`
@@ -108,8 +106,6 @@ Data type: `Stdlib::Absolutepath`
 Location where the CA certificate file will be stored on the managed node.
 This sets the default globally for use by all `certificates::site` resources.
 Optional value. (default: `cert_path`).
-
-Default value: `lookup('certificates::cert_path')`
 
 ##### <a name="-certificates--ca_source_path"></a>`ca_source_path`
 
@@ -194,8 +190,6 @@ The extension of the certificate chain file.
 This sets the default globally for use by all `certificates::site` resources.
 Optional value. (default: 'crt').
 
-Default value: `lookup('certificates::cert_ext')`
-
 ##### <a name="-certificates--chain_name"></a>`chain_name`
 
 Data type: `Optional[String]`
@@ -212,8 +206,6 @@ Data type: `Stdlib::Absolutepath`
 Location where the certificate chain file will be stored on the managed node.
 This sets the default globally for use by all `certificates::site` resources.
 Optional value. (default: `$cert_path`).
-
-Default value: `lookup('certificates::cert_path')`
 
 ##### <a name="-certificates--chain_source_path"></a>`chain_source_path`
 
@@ -309,8 +301,6 @@ Optional value. Defaults:
   - `httpd` for RedHat-based systems
   - `apache2` for Debian-based, Suse-based, and Gentoo-based systems
   - `apache24` for FreeBSD-based systems
-
-Default value: `lookup('certificates::service')`
 
 ##### <a name="-certificates--sites"></a>`sites`
 
@@ -443,7 +433,7 @@ Data type: `Boolean`
 Boolean for whether to look for a CA certificate file.
 Optional value. (default: false).
 
-Default value: `$::certificates::ca_cert`
+Default value: `$certificates::ca_cert`
 
 ##### <a name="-certificates--site--ca_content"></a>`ca_content`
 
@@ -452,7 +442,7 @@ Data type: `Optional[String]`
 A string representing the contents of the CA file.
 Optional value. (default: undef).
 
-Default value: `$::certificates::ca_content`
+Default value: `$certificates::ca_content`
 
 ##### <a name="-certificates--site--ca_ext"></a>`ca_ext`
 
@@ -461,7 +451,7 @@ Data type: `String`
 The extension of the CA certificate file.
 Optional value. (default: 'crt').
 
-Default value: `$::certificates::ca_ext`
+Default value: `$certificates::ca_ext`
 
 ##### <a name="-certificates--site--ca_name"></a>`ca_name`
 
@@ -470,7 +460,7 @@ Data type: `Optional[String]`
 The name of the CA certificate file.
 Optional value. (default: undef).
 
-Default value: `$::certificates::ca_name`
+Default value: `$certificates::ca_name`
 
 ##### <a name="-certificates--site--ca_path"></a>`ca_path`
 
@@ -479,7 +469,7 @@ Data type: `Stdlib::Absolutepath`
 Location where the CA certificate file will be stored on the managed node.
 Optional value. (default: `cert_path`).
 
-Default value: `$::certificates::ca_path`
+Default value: `$certificates::ca_path`
 
 ##### <a name="-certificates--site--ca_source_path"></a>`ca_source_path`
 
@@ -490,7 +480,7 @@ e.g. `puppet:///ca_certs` will search for the mount point defined in the
 fileserver.conf on the Puppet Server for the specified files.
 Optional value. (default: `source_path`).
 
-Default value: `pick_default($::certificates::ca_source_path, $source_path)`
+Default value: `pick_default($certificates::ca_source_path, $source_path)`
 
 ##### <a name="-certificates--site--cert_chain"></a>`cert_chain`
 
@@ -499,7 +489,7 @@ Data type: `Boolean`
 Boolean for whether to look for a certificate chain file.
 Optional value. (default: false).
 
-Default value: `$::certificates::cert_chain`
+Default value: `$certificates::cert_chain`
 
 ##### <a name="-certificates--site--cert_content"></a>`cert_content`
 
@@ -509,7 +499,7 @@ A string representing the contents of the certificate file.  This can only be
 provided if `$source_path` is undefined or an error will occur.
 Optional value. (default: undef).
 
-Default value: `$::certificates::cert_content`
+Default value: `$certificates::cert_content`
 
 ##### <a name="-certificates--site--cert_dir_mode"></a>`cert_dir_mode`
 
@@ -518,7 +508,7 @@ Data type: `String`
 Permissions of the certificate directory.
 Optional value. (default: '0755').
 
-Default value: `$::certificates::cert_dir_mode`
+Default value: `$certificates::cert_dir_mode`
 
 ##### <a name="-certificates--site--cert_ext"></a>`cert_ext`
 
@@ -527,7 +517,7 @@ Data type: `String`
 The extension of the certificate file.
 Optional value. (default: '.crt').
 
-Default value: `$::certificates::cert_ext`
+Default value: `$certificates::cert_ext`
 
 ##### <a name="-certificates--site--cert_mode"></a>`cert_mode`
 
@@ -536,7 +526,7 @@ Data type: `String`
 Permissions of the certificate files.
 Optional value. (default: '0644').
 
-Default value: `$::certificates::cert_mode`
+Default value: `$certificates::cert_mode`
 
 ##### <a name="-certificates--site--cert_path"></a>`cert_path`
 
@@ -549,7 +539,7 @@ Optional value. Defaults:
   - `/usr/local/etc/apache24` on FreeBSD-based systems
   - `/etc/ssl/apache2` on Gentoo-based systems
 
-Default value: `$::certificates::cert_path`
+Default value: `$certificates::cert_path`
 
 ##### <a name="-certificates--site--chain_content"></a>`chain_content`
 
@@ -558,7 +548,7 @@ Data type: `Optional[String]`
 A string representing the contents of the chain file.
 Optional value. (default: undef).
 
-Default value: `$::certificates::chain_content`
+Default value: `$certificates::chain_content`
 
 ##### <a name="-certificates--site--chain_ext"></a>`chain_ext`
 
@@ -567,7 +557,7 @@ Data type: `String`
 The extension of the certificate chain file.
 Optional value. (default: 'crt').
 
-Default value: `$::certificates::chain_ext`
+Default value: `$certificates::chain_ext`
 
 ##### <a name="-certificates--site--chain_name"></a>`chain_name`
 
@@ -576,7 +566,7 @@ Data type: `Optional[String]`
 The name of the certificate chain file.
 Optional value. (default: undef).
 
-Default value: `$::certificates::chain_name`
+Default value: `$certificates::chain_name`
 
 ##### <a name="-certificates--site--chain_path"></a>`chain_path`
 
@@ -585,7 +575,7 @@ Data type: `Stdlib::Absolutepath`
 Location where the certificate chain file will be stored on the managed node.
 Optional value. (default: `$cert_path`).
 
-Default value: `$::certificates::chain_path`
+Default value: `$certificates::chain_path`
 
 ##### <a name="-certificates--site--chain_source_path"></a>`chain_source_path`
 
@@ -596,7 +586,7 @@ e.g. `puppet:///chain_certs` will search for the mount point defined in the
 fileserver.conf on the Puppet Server for the specified files.
 Optional value. (default: `$source_path`).
 
-Default value: `pick_default($::certificates::chain_source_path, $source_path)`
+Default value: `pick_default($certificates::chain_source_path, $source_path)`
 
 ##### <a name="-certificates--site--dhparam"></a>`dhparam`
 
@@ -636,7 +626,7 @@ Data type: `String`
 The name of the dhparam file.
 Optional value. (default: 'dh2048.pem').
 
-Default value: `$::certificates::dhparam_file`
+Default value: `$certificates::dhparam_file`
 
 ##### <a name="-certificates--site--ensure"></a>`ensure`
 
@@ -657,7 +647,7 @@ Optional value. Defaults:
   - `root` for Redhat-based, Debian-based, and Suse-based systems
   - `wheel` for FreeBSD and Gentoo-based systems
 
-Default value: `$::certificates::group`
+Default value: `$certificates::group`
 
 ##### <a name="-certificates--site--key_content"></a>`key_content`
 
@@ -667,7 +657,7 @@ A string representing the contents of the key file.  This can only be
 provided if `$source_path` is undefined or an error will occur.
 Optional value. (default: undef).
 
-Default value: `$::certificates::key_content`
+Default value: `$certificates::key_content`
 
 ##### <a name="-certificates--site--key_dir_mode"></a>`key_dir_mode`
 
@@ -676,7 +666,7 @@ Data type: `String`
 Permissions of the private keys directory.
 Optional value. (default: '0755').
 
-Default value: `$::certificates::key_dir_mode`
+Default value: `$certificates::key_dir_mode`
 
 ##### <a name="-certificates--site--key_ext"></a>`key_ext`
 
@@ -685,7 +675,7 @@ Data type: `String`
 The extension of the private key file.
 Optional value. (default: '.key').
 
-Default value: `$::certificates::key_ext`
+Default value: `$certificates::key_ext`
 
 ##### <a name="-certificates--site--key_mode"></a>`key_mode`
 
@@ -694,7 +684,7 @@ Data type: `String`
 Permissions of the private keys.
 Optional value. (default: '0600').
 
-Default value: `$::certificates::key_mode`
+Default value: `$certificates::key_mode`
 
 ##### <a name="-certificates--site--key_path"></a>`key_path`
 
@@ -707,7 +697,7 @@ Optional value. Defaults:
   - `/usr/local/etc/apache24` on FreeBSD-based systems
   - `/etc/ssl/apache2` on Gentoo-based systems
 
-Default value: `$::certificates::key_path`
+Default value: `$certificates::key_path`
 
 ##### <a name="-certificates--site--merge_chain"></a>`merge_chain`
 
@@ -746,7 +736,7 @@ Data type: `String`
 Name of the owner of the certificates.
 Optional value. (default: 'root').
 
-Default value: `$::certificates::owner`
+Default value: `$certificates::owner`
 
 ##### <a name="-certificates--site--service"></a>`service`
 
@@ -759,7 +749,7 @@ Optional value. Defaults:
   - `apache2` for Debian-based, Suse-based, and Gentoo-based systems
   - `apache24` for FreeBSD-based systems
 
-Default value: `$::certificates::service`
+Default value: `$certificates::service`
 
 ##### <a name="-certificates--site--source_cert_name"></a>`source_cert_name`
 
@@ -787,7 +777,7 @@ The location of the certificate files. Typically references a module's files.
 e.g. `puppet:///site_certs` will search for the mount point defined in the
 fileserver.conf on the Puppet Server for the specified files.
 
-Default value: `$::certificates::source_path`
+Default value: `$certificates::source_path`
 
 ##### <a name="-certificates--site--validate_x509"></a>`validate_x509`
 
@@ -797,4 +787,4 @@ A boolean value to determine whether or not to validate the certificate and key 
 Failure will cause the catalog to fail compilation.
 Optional value. (default: false).
 
-Default value: `$::certificates::validate_x509`
+Default value: `$certificates::validate_x509`
