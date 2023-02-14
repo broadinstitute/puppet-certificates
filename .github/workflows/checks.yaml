@@ -19,35 +19,13 @@ jobs:
 
       - name: 'Set up Ruby'
         uses: 'ruby/setup-ruby@v1.137.2'
+        env:
+          BUNDLE_SILENCE_ROOT_WARNING: '1'
+          BUNDLE_WITH: 'development'
         with:
-          rubygems: 'latest'
+          bundler-cache: true
           ruby-version: '2.7'
-
-      - name: Get full Ruby version
-        id: full-ruby-version
-        run: |
-          ruby -e 'puts RUBY_VERSION' | awk '{print "ruby_version="$1}' >> $GITHUB_ENV
-
-      - name: 'Cache Ruby'
-        uses: 'actions/cache@v3'
-        with:
-          path: 'vendor/bundle'
-          key: ${{ runner.os }}-${{ env.ruby_version }}-v2-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-${{ env.ruby_version }}-v2-gems-
-
-      - name: 'Update RubyGems and install bundler'
-        run: |
-          gem update --system
-          gem install bundler
-          gem --version
-          bundler --version
-
-      - name: 'Install ruby dependencies'
-        run: |
-          bundle config path vendor/bundle
-          bundle config set with 'development'
-          bundle install --jobs 4 --retry 3
+          rubygems: 'latest'
 
       - name: 'Run static analysis'
         run: |
@@ -77,42 +55,13 @@ jobs:
 
       - name: 'Set up Ruby'
         uses: 'ruby/setup-ruby@v1.137.2'
-        with:
-          rubygems: 'latest'
-          ruby-version: ${{ matrix.ruby }}
-
-      - name: Get full Ruby version
-        id: full-ruby-version
-        run: |
-          ruby -e 'puts RUBY_VERSION' | awk '{print "ruby_version="$1}' >> $GITHUB_ENV
-
-      - name: 'Cache Ruby'
-        uses: 'actions/cache@v3'
-        with:
-          path: 'vendor/bundle'
-          key: ${{ runner.os }}-${{ env.ruby_version }}-v2-gems-${{ hashFiles('**/Gemfile.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-${{ env.ruby_version }}-v2-gems-
-
-      - name: 'Update RubyGems and install bundler'
-        run: |
-          gem update --system
-          gem install bundler
-          gem --version
-          bundler --version
-
-      - name: 'Install ruby dependencies'
         env:
-          PUPPET_GEM_VERSION: ${{ matrix.puppet }}
-        run: |
-          bundle config path vendor/bundle
-          bundle config set with 'development'
-          bundle install --jobs 4 --retry 3
-
-      - name: 'Versions'
-        run: |
-          ruby --version
-          bundle exec puppet --version
+          BUNDLE_SILENCE_ROOT_WARNING: '1'
+          BUNDLE_WITH: 'development'
+        with:
+          bundler-cache: true
+          ruby-version: ${{ matrix.ruby }}
+          rubygems: 'latest'
 
       - name: 'Install fixtures'
         run: 'bundle exec rake spec_prep'
