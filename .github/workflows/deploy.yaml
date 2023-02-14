@@ -29,4 +29,5 @@ jobs:
         env:
           PDK_FORGE_TOKEN: ${{ secrets.BLACKSMITH_FORGE_API_KEY }}
         run: |
+          bundle exec pdk build
           bundle exec pdk release publish --skip-changelog --skip-documentation --force
