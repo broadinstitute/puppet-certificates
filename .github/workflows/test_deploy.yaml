@@ -1,34 +1,13 @@
 ---
-name: 'test_deploy'
+name: 'test_build'
 
 'on':
   pull_request:
     branches:
       - 'main'
-  push:
-    branches:
-      - 'main'
 
 jobs:
-  test_deploy:
-
-    runs-on: 'ubuntu-latest'
-
-    steps:
-      - name: 'Checkout repo'
-        uses: 'actions/checkout@v3'
-
-      - name: 'Set up Ruby'
-        uses: 'ruby/setup-ruby@v1.152.0'
-        env:
-          BUNDLE_SILENCE_ROOT_WARNING: '1'
-          BUNDLE_WITH: 'development'
-        with:
-          bundler-cache: true
-          ruby-version: '3.2'
-          rubygems: 'latest'
-
-      - name: 'Build and publish a package to Puppet Forge'
-        run: |
-          bundle exec pdk build
-          bundle exec pdk release publish --skip-changelog --skip-dependency --skip-documentation --skip-publish --forge-token='abc123'
+  test_build:
+    uses: broadinstitute/shared-workflows/.github/workflows/puppet-build.yaml@v2.0.1
+    with:
+      puppet_package_name: broadinstitute-certificates

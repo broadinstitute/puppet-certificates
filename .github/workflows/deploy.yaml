@@ -5,29 +5,8 @@ name: 'deploy'
   push:
     tags:
       - '[0-9]+.[0-9]+.[0-9]+'
-
 jobs:
-  forge_deploy:
-
-    runs-on: 'ubuntu-latest'
-
-    steps:
-      - name: 'Checkout repo'
-        uses: 'actions/checkout@v3'
-
-      - name: 'Set up Ruby'
-        uses: 'ruby/setup-ruby@v1.152.0'
-        env:
-          BUNDLE_SILENCE_ROOT_WARNING: '1'
-          BUNDLE_WITH: 'development'
-        with:
-          bundler-cache: true
-          ruby-version: '3.2'
-          rubygems: 'latest'
-
-      - name: 'Build and publish a package to Puppet Forge'
-        env:
-          PDK_FORGE_TOKEN: ${{ secrets.BLACKSMITH_FORGE_API_KEY }}
-        run: |
-          bundle exec pdk build
-          bundle exec pdk release publish --skip-changelog --skip-documentation --force
+  deploy:
+    uses: broadinstitute/shared-workflows/.github/workflows/puppet-forge-deploy.yaml@v2.0.1
+    secrets:
+      forge_token: ${{ secrets.BLACKSMITH_FORGE_API_KEY }}

@@ -5,66 +5,11 @@ name: 'checks'
   pull_request:
     branches:
       - 'main'
-  push:
-    branches:
-      - 'main'
 
 jobs:
+  pre-commit:
+    uses: broadinstitute/shared-workflows/.github/workflows/pre-commit.yaml@v2.0.1
   static-analysis:
-    runs-on: 'ubuntu-latest'
-
-    steps:
-      - name: 'Checkout repo'
-        uses: 'actions/checkout@v3'
-
-      - name: 'Set up Ruby'
-        uses: 'ruby/setup-ruby@v1.152.0'
-        env:
-          BUNDLE_SILENCE_ROOT_WARNING: '1'
-          BUNDLE_WITH: 'development'
-        with:
-          bundler-cache: true
-          ruby-version: '3.2'
-          rubygems: 'latest'
-
-      - name: 'Run static analysis'
-        run: |
-          bundle exec rake check:symlinks
-          bundle exec rake check:git_ignore
-          bundle exec rake check:dot_underscore
-          bundle exec rake check:test_file
-          bundle exec rake rubocop
-          bundle exec rake syntax
-          bundle exec rake lint
-          bundle exec rake metadata_lint
-
+    uses: broadinstitute/shared-workflows/.github/workflows/puppet-lint.yaml@v2.0.1
   unit-tests:
-    runs-on: 'ubuntu-latest'
-
-    strategy:
-      matrix:
-        puppet:
-          - '< 7.0.0'
-          - '< 8.0.0'
-        ruby:
-          - '2.7'
-          - '3.2'
-    steps:
-      - name: 'Checkout repo'
-        uses: 'actions/checkout@v3'
-
-      - name: 'Set up Ruby'
-        uses: 'ruby/setup-ruby@v1.152.0'
-        env:
-          BUNDLE_SILENCE_ROOT_WARNING: '1'
-          BUNDLE_WITH: 'development'
-        with:
-          bundler-cache: true
-          ruby-version: ${{ matrix.ruby }}
-          rubygems: 'latest'
-
-      - name: 'Install fixtures'
-        run: 'bundle exec rake spec_prep'
-
-      - name: 'Run unit tests'
-        run: 'bundle exec rake spec:simplecov'
+    uses: broadinstitute/shared-workflows/.github/workflows/puppet-unit-test.yaml@v2.0.1
