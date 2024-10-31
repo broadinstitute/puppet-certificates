@@ -16,6 +16,6 @@ metadata:
 spec:
   domain: infrastructure-tools
   lifecycle: production
-  owner: devnull
+  owner: bits-aviso
   system: puppet
   type: service
