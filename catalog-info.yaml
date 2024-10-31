@@ -14,7 +14,8 @@ metadata:
     github.com/project-slug: broadinstitute/puppet-certificates
     backstage.io/techdocs-ref: dir:.
 spec:
-  type: service
-  owner: devnull
+  domain: infrastructure-tools
   lifecycle: production
-  
+  owner: devnull
+  system: puppet
+  type: service
