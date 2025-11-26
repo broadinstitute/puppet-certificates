@@ -788,3 +788,4 @@ Failure will cause the catalog to fail compilation.
 Optional value. (default: false).
 
 Default value: `$certificates::validate_x509`
+
