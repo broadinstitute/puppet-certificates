@@ -13,11 +13,11 @@ describe 'certificates::site', type: :define do
       if osfamily == 'Debian'
         let(:facts) do
           {
-            'lsbdistcodename'           => 'wheezy',
+            'lsbdistcodename'           => 'bookworm',
             'lsbdistid'                 => 'Debian',
             'operatingsystem'           => 'Debian',
-            'operatingsystemmajrelease' => '9',
-            'operatingsystemrelease'    => '9.5',
+            'operatingsystemmajrelease' => '12',
+            'operatingsystemrelease'    => '12.12',
             'osfamily'                  => 'Debian',
           }
         end
@@ -42,8 +42,8 @@ describe 'certificates::site', type: :define do
         let(:facts) do
           {
             'operatingsystem'           => 'FreeBSD',
-            'operatingsystemmajrelease' => '10',
-            'operatingsystemrelease'    => '10.0-RELEASE-p18',
+            'operatingsystemmajrelease' => '14',
+            'operatingsystemrelease'    => '14.1-RELEASE-p1',
             'osfamily'                  => osfamily,
           }
         end
@@ -93,8 +93,8 @@ describe 'certificates::site', type: :define do
         let(:facts) do
           {
             'operatingsystem'           => 'RedHat',
-            'operatingsystemmajrelease' => '7',
-            'operatingsystemrelease'    => '7.5',
+            'operatingsystemmajrelease' => '8',
+            'operatingsystemrelease'    => '8.10',
             'osfamily'                  => osfamily,
           }
         end
@@ -120,11 +120,11 @@ describe 'certificates::site', type: :define do
   context 'on Debian-like setup for the remaining tests' do
     let(:facts) do
       {
-        'lsbdistcodename'           => 'wheezy',
+        'lsbdistcodename'           => 'bookworm',
         'lsbdistid'                 => 'Debian',
         'operatingsystem'           => 'Debian',
-        'operatingsystemmajrelease' => '9',
-        'operatingsystemrelease'    => '9.5',
+        'operatingsystemmajrelease' => '12',
+        'operatingsystemrelease'    => '12.12',
         'osfamily'                  => 'Debian',
       }
     end

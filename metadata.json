@@ -10,18 +10,17 @@
   "dependencies": [
     {
       "name": "puppetlabs-stdlib",
-      "version_requirement": ">= 4.12.0 < 9.0.0"
+      "version_requirement": ">= 4.12.0 < 10.0.0"
     },
     {
       "name": "puppetlabs/concat",
-      "version_requirement": ">= 1.1.1 < 8.0.0"
+      "version_requirement": ">= 1.1.1 < 10.0.0"
     }
   ],
   "operatingsystem_support": [
     {
       "operatingsystem": "RedHat",
       "operatingsystemrelease": [
-        "7",
         "8",
         "9"
       ]
@@ -29,7 +28,6 @@
     {
       "operatingsystem": "CentOS",
       "operatingsystemrelease": [
-        "7",
         "8",
         "9"
       ]
@@ -37,7 +35,6 @@
     {
       "operatingsystem": "OracleLinux",
       "operatingsystemrelease": [
-        "7",
         "8",
         "9"
       ]
@@ -45,7 +42,6 @@
     {
       "operatingsystem": "Scientific",
       "operatingsystemrelease": [
-        "7",
         "8",
         "9"
       ]
@@ -53,19 +49,17 @@
     {
       "operatingsystem": "Debian",
       "operatingsystemrelease": [
-        "8",
-        "9",
-        "10"
+        "11",
+        "12",
+        "13"
       ]
     },
     {
       "operatingsystem": "Ubuntu",
       "operatingsystemrelease": [
-        "14.04",
-        "16.04",
-        "18.04",
         "20.04",
-        "22.04"
+        "22.04",
+        "24.04"
       ]
     },
     {
@@ -80,10 +74,10 @@
   "requirements": [
     {
       "name": "puppet",
-      "version_requirement": ">=5.0.0 < 8.0.0"
+      "version_requirement": ">=5.0.0 < 9.0.0"
     }
   ],
   "pdk-version": "3.4.0",
-  "template-url": "https://github.com/puppetlabs/pdk-templates#3.4.0.3",
-  "template-ref": "tags/3.4.0.3-0-g8fb22fc"
+  "template-url": "https://github.com/puppetlabs/pdk-templates#3.6.1",
+  "template-ref": "tags/3.6.1-0-gb9426e5"
 }

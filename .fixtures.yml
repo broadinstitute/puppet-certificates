@@ -1,8 +1,9 @@
+---
 fixtures:
   forge_modules:
     concat:
-      repo: 'puppetlabs/concat'
+      repo: puppetlabs/concat
     stdlib:
-      repo: 'puppetlabs/stdlib'
+      repo: puppetlabs/stdlib
   symlinks:
     certificates: "#{source_dir}"

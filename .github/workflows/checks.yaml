@@ -1,15 +1,17 @@
 ---
-name: 'checks'
+name: checks
 
-'on':
+"on":
   pull_request:
     branches:
-      - 'main'
+      - main
 
 jobs:
   pre-commit:
-    uses: broadinstitute/shared-workflows/.github/workflows/pre-commit.yaml@v2.3.0
+    uses: broadinstitute/shared-workflows/.github/workflows/pre-commit.yaml@v6.0.0
+  prettier:
+    uses: broadinstitute/shared-workflows/.github/workflows/prettier.yaml@v6.0.0
   static-analysis:
-    uses: broadinstitute/shared-workflows/.github/workflows/puppet-lint.yaml@v2.3.0
+    uses: broadinstitute/shared-workflows/.github/workflows/puppet-lint.yaml@v6.0.0
   unit-tests:
-    uses: broadinstitute/shared-workflows/.github/workflows/puppet-unit-test.yaml@v2.3.0
+    uses: broadinstitute/shared-workflows/.github/workflows/puppet-unit-test.yaml@v6.0.0
