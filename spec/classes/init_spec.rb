@@ -9,9 +9,9 @@ describe 'certificates', type: :class do
             'osfamily'                  => 'Debian',
             'operatingsystem'           => 'Debian',
             'lsbdistid'                 => 'Debian',
-            'lsbdistcodename'           => 'wheezy',
-            'operatingsystemrelease'    => '7.3',
-            'operatingsystemmajrelease' => '7',
+            'lsbdistcodename'           => 'bookworm',
+            'operatingsystemrelease'    => '12.12',
+            'operatingsystemmajrelease' => '12',
           }
         end
 
@@ -25,8 +25,8 @@ describe 'certificates', type: :class do
           {
             'osfamily'                  => osfamily,
             'operatingsystem'           => 'FreeBSD',
-            'operatingsystemrelease'    => '10.0-RELEASE-p18',
-            'operatingsystemmajrelease' => '10',
+            'operatingsystemrelease'    => '14.1-RELEASE-p1',
+            'operatingsystemmajrelease' => '14',
           }
         end
 
@@ -54,8 +54,8 @@ describe 'certificates', type: :class do
           {
             'osfamily'                  => osfamily,
             'operatingsystem'           => 'RedHat',
-            'operatingsystemrelease'    => '7.2',
-            'operatingsystemmajrelease' => '7',
+            'operatingsystemrelease'    => '8.10',
+            'operatingsystemmajrelease' => '8',
           }
         end
 

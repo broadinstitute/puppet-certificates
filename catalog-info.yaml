@@ -2,17 +2,17 @@
 apiVersion: backstage.io/v1alpha1
 kind: Component
 metadata:
-  name: puppet-certificates
-  title: puppet-certificates
+  annotations:
+    backstage.io/techdocs-ref: dir:.
+    github.com/project-slug: broadinstitute/puppet-certificates
   description: "SSL Certificate File Management for Puppet"
+  name: puppet-certificates
   tags:
     - bits
     - bits-tools
-    - puppet
     - certificates
-  annotations:
-    github.com/project-slug: broadinstitute/puppet-certificates
-    backstage.io/techdocs-ref: dir:.
+    - puppet
+  title: puppet-certificates
 spec:
   domain: infrastructure-tools
   lifecycle: production

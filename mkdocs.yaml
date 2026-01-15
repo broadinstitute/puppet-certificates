@@ -1,0 +1,8 @@
+---
+site_name: Puppet Certificates Module
+
+nav:
+  - Home: README.md
+
+plugins:
+  - techdocs-core
