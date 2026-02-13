@@ -26,7 +26,5 @@ Gemfile:
   delete: true
 .yardopts:
   delete: true
-spec/default_facts.yml:
-  delete: true
 spec/spec_helper.rb:
   hiera_config: "spec/fixtures/hiera.yaml"
