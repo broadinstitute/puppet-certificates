@@ -13,12 +13,18 @@ describe 'certificates::site', type: :define do
       if osfamily == 'Debian'
         let(:facts) do
           {
-            'lsbdistcodename'           => 'bookworm',
-            'lsbdistid'                 => 'Debian',
-            'operatingsystem'           => 'Debian',
-            'operatingsystemmajrelease' => '12',
-            'operatingsystemrelease'    => '12.12',
-            'osfamily'                  => 'Debian',
+            'os' => {
+              'distro' => {
+                'codename' => 'bookworm',
+                'id'       => 'debian',
+              },
+              'family' => osfamily,
+              'name'   => 'Debian',
+              'release': {
+                'full'  => '12.12',
+                'major' => '12',
+              },
+            },
           }
         end
 
@@ -41,10 +47,14 @@ describe 'certificates::site', type: :define do
       if osfamily == 'FreeBSD'
         let(:facts) do
           {
-            'operatingsystem'           => 'FreeBSD',
-            'operatingsystemmajrelease' => '14',
-            'operatingsystemrelease'    => '14.1-RELEASE-p1',
-            'osfamily'                  => osfamily,
+            'os' => {
+              'family' => osfamily,
+              'name'   => 'FreeBSD',
+              'release': {
+                'full'  => '14.1-RELEASE-p1',
+                'major' => '14',
+              },
+            },
           }
         end
 
@@ -67,9 +77,14 @@ describe 'certificates::site', type: :define do
       if osfamily == 'Gentoo'
         let(:facts) do
           {
-            'operatingsystem'        => 'Gentoo',
-            'operatingsystemrelease' => '3.16.1-gentoo',
-            'osfamily'               => osfamily,
+            'os' => {
+              'family' => osfamily,
+              'name'   => 'Gentoo',
+              'release': {
+                'full'  => '3.16.1-gentoo',
+                'major' => '3',
+              },
+            },
           }
         end
 
@@ -92,10 +107,14 @@ describe 'certificates::site', type: :define do
       if osfamily == 'RedHat'
         let(:facts) do
           {
-            'operatingsystem'           => 'RedHat',
-            'operatingsystemmajrelease' => '8',
-            'operatingsystemrelease'    => '8.10',
-            'osfamily'                  => osfamily,
+            'os' => {
+              'family' => osfamily,
+              'name'   => 'RedHat',
+              'release': {
+                'full'  => '8.10',
+                'major' => '8',
+              },
+            },
           }
         end
 
@@ -120,12 +139,18 @@ describe 'certificates::site', type: :define do
   context 'on Debian-like setup for the remaining tests' do
     let(:facts) do
       {
-        'lsbdistcodename'           => 'bookworm',
-        'lsbdistid'                 => 'Debian',
-        'operatingsystem'           => 'Debian',
-        'operatingsystemmajrelease' => '12',
-        'operatingsystemrelease'    => '12.12',
-        'osfamily'                  => 'Debian',
+        'os' => {
+          'distro' => {
+            'codename' => 'bookworm',
+            'id'       => 'debian',
+          },
+          'family' => 'Debian',
+          'name'   => 'Debian',
+          'release': {
+            'full'  => '12.12',
+            'major' => '12',
+          },
+        },
       }
     end
 
@@ -137,8 +162,8 @@ describe 'certificates::site', type: :define do
     context 'with only cert and key content set' do
       let(:params) do
         {
-          'cert_content'  => 'cert1111',
-          'key_content'   => 'key1111',
+          'cert_content' => 'cert1111',
+          'key_content'  => 'key1111',
         }
       end
 
@@ -153,7 +178,7 @@ describe 'certificates::site', type: :define do
     context 'with only cert and key using source_path' do
       let(:params) do
         {
-          'source_path'   => 'puppet:///site_certs/base.example.org',
+          'source_path' => 'puppet:///site_certs/base.example.org',
         }
       end
 
@@ -170,8 +195,8 @@ describe 'certificates::site', type: :define do
     context 'with ensure => absent' do
       let(:params) do
         {
-          'ensure'        => 'absent',
-          'source_path'   => 'puppet:///site_certs/base.example.org',
+          'ensure'      => 'absent',
+          'source_path' => 'puppet:///site_certs/base.example.org',
         }
       end
 
@@ -186,9 +211,9 @@ describe 'certificates::site', type: :define do
     context 'with ensure => absent and dhparam => true' do
       let(:params) do
         {
-          'dhparam'       => true,
-          'ensure'        => 'absent',
-          'source_path'   => 'puppet:///site_certs/base.example.org',
+          'dhparam'     => true,
+          'ensure'      => 'absent',
+          'source_path' => 'puppet:///site_certs/base.example.org',
         }
       end
 
@@ -206,11 +231,11 @@ describe 'certificates::site', type: :define do
     context 'with CA cert content' do
       let(:params) do
         {
-          'ca_cert'       => true,
-          'ca_content'    => 'ca2222',
-          'ca_name'       => 'ca',
-          'cert_content'  => 'cert1111',
-          'key_content'   => 'key1111',
+          'ca_cert'      => true,
+          'ca_content'   => 'ca2222',
+          'ca_name'      => 'ca',
+          'cert_content' => 'cert1111',
+          'key_content'  => 'key1111',
         }
       end
 
@@ -228,9 +253,9 @@ describe 'certificates::site', type: :define do
     context 'with CA cert and just source_path' do
       let(:params) do
         {
-          'ca_cert'       => true,
-          'ca_name'       => 'ca',
-          'source_path'   => 'puppet:///site_certs/base.example.org',
+          'ca_cert'     => true,
+          'ca_name'     => 'ca',
+          'source_path' => 'puppet:///site_certs/base.example.org',
         }
       end
 
@@ -297,9 +322,9 @@ describe 'certificates::site', type: :define do
     context 'with chain cert and just source_path' do
       let(:params) do
         {
-          'cert_chain'    => true,
-          'chain_name'    => 'chain',
-          'source_path'   => 'puppet:///site_certs/base.example.org',
+          'cert_chain'  => true,
+          'chain_name'  => 'chain',
+          'source_path' => 'puppet:///site_certs/base.example.org',
         }
       end
 
@@ -344,12 +369,12 @@ describe 'certificates::site', type: :define do
     context 'with merge_chain => true with CA content' do
       let(:params) do
         {
-          'ca_cert'       => true,
-          'ca_content'    => 'ca2222',
-          'ca_name'       => 'ca',
-          'cert_content'  => 'cert1111',
-          'key_content'   => 'key1111',
-          'merge_chain'   => true,
+          'ca_cert'      => true,
+          'ca_content'   => 'ca2222',
+          'ca_name'      => 'ca',
+          'cert_content' => 'cert1111',
+          'key_content'  => 'key1111',
+          'merge_chain'  => true,
         }
       end
 
@@ -614,9 +639,9 @@ describe 'certificates::site', type: :define do
     context 'with merge_dhparam => true, with source' do
       let(:params) do
         {
-          'dhparam'         => true,
-          'merge_dhparam'   => true,
-          'source_path'     => 'puppet:///site_certs/base.example.org',
+          'dhparam'       => true,
+          'merge_dhparam' => true,
+          'source_path'   => 'puppet:///site_certs/base.example.org',
         }
       end
 
@@ -776,10 +801,10 @@ describe 'certificates::site', type: :define do
     context 'with merge_chain => false, merge_key => true, without chain, CA, or dhparam, with contents' do
       let(:params) do
         {
-          'cert_content'  => 'cert1111',
-          'key_content'   => 'key1111',
-          'merge_chain'   => false,
-          'merge_key'     => true,
+          'cert_content' => 'cert1111',
+          'key_content'  => 'key1111',
+          'merge_chain'  => false,
+          'merge_key'    => true,
         }
       end
 
@@ -993,8 +1018,8 @@ describe 'certificates::site', type: :define do
     context 'with dhparam file' do
       let(:params) do
         {
-          'dhparam'       => true,
-          'source_path'   => 'puppet:///site_certs/base.example.org',
+          'dhparam'     => true,
+          'source_path' => 'puppet:///site_certs/base.example.org',
         }
       end
 
@@ -1006,9 +1031,9 @@ describe 'certificates::site', type: :define do
     context 'with dhparam file and custom directory' do
       let(:params) do
         {
-          'dhparam'       => true,
-          'dhparam_dir'   => '/tmp/dir',
-          'source_path'   => 'puppet:///site_certs/base.example.org',
+          'dhparam'     => true,
+          'dhparam_dir' => '/tmp/dir',
+          'source_path' => 'puppet:///site_certs/base.example.org',
         }
       end
 
@@ -1020,9 +1045,9 @@ describe 'certificates::site', type: :define do
     context 'with dhparam file, with ensure => absent' do
       let(:params) do
         {
-          'dhparam'       => true,
-          'ensure'        => 'absent',
-          'source_path'   => 'puppet:///site_certs/base.example.org',
+          'dhparam'     => true,
+          'ensure'      => 'absent',
+          'source_path' => 'puppet:///site_certs/base.example.org',
         }
       end
 
@@ -1034,8 +1059,8 @@ describe 'certificates::site', type: :define do
     context 'with dhparam file with source_path' do
       let(:params) do
         {
-          'dhparam'       => true,
-          'source_path'   => 'puppet:///site_certs/base.example.org',
+          'dhparam'     => true,
+          'source_path' => 'puppet:///site_certs/base.example.org',
         }
       end
 
@@ -1062,9 +1087,9 @@ describe 'certificates::site', type: :define do
     context 'with dhparam file with custom name' do
       let(:params) do
         {
-          'dhparam'       => true,
-          'dhparam_file'  => 'dhparam.crt',
-          'source_path'   => 'puppet:///site_certs/base.example.org',
+          'dhparam'      => true,
+          'dhparam_file' => 'dhparam.crt',
+          'source_path'  => 'puppet:///site_certs/base.example.org',
         }
       end
 

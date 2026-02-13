@@ -6,7 +6,7 @@ defaults:
 
 hierarchy:
   - name: OS Family
-    path: "%{facts.osfamily}.yaml"
+    path: "%{facts.os.family}.yaml"
 
   - name: Common data
     path: common.yaml
