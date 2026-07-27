@@ -177,6 +177,32 @@ This module also provides functions for other distributions and operating
 systems, such as FreeBSD and Gentoo, but is not formally tested on them and are
 subject to regressions.
 
+## Changelog
+
+To generate the `CHANGELOG.md`, you will need a container runtime like
+[Podman](https://podman.io/) and a GitHub personal access token. We currently
+use
+[github-changelog-generator](https://github.com/github-changelog-generator/github-changelog-generator)
+for this purpose. The following should generate the file using information from
+GitHub:
+
+```shell
+podman run -it --rm \
+    -e CHANGELOG_GITHUB_TOKEN='yourtokenhere' \
+    -v "$(pwd)":/working \
+    -w /working \
+    githubchangeloggenerator/github-changelog-generator:latest \
+        --verbose \
+        --future-release 2.0.0
+```
+
+This will generate the log for an upcoming release of `2.0.0` that has not yet
+been tagged.
+
+As a note, this repository uses the default labels for formatting the
+`CHANGELOG.md`. Label information can be found here:
+[Advanced-change-log-generation-examples](https://github.com/github-changelog-generator/github-changelog-generator/wiki/Advanced-change-log-generation-examples#section-options)
+
 ## Contributors
 
 Riccardo Calixte ([@rcalixte](https://github.com/rcalixte))
