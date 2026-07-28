@@ -351,45 +351,15 @@ define certificates::site (
     }
   }
 
-  if (! defined(File[$cert_path])) {
-    file { $cert_path:
-      ensure => 'directory',
-      backup => false,
-      owner  => $owner,
-      group  => $group,
-      mode   => $cert_dir_mode,
+  # Create paths if they don't exist already, but don't claim them as a
+  # file resource so that the permissions are tunable outside this module.
+  $dest_dirs = [$ca_path, $cert_path, $chain_path, $key_path].unique
+  $dest_dirs.each |String $dir| {
+    exec { "${name} mkdir ${dir}":
+      command => "mkdir -p ${dir}",
+      unless  => "test -d ${dir}",
     }
   }
-
-  if (! defined(File[$chain_path])) {
-    file { $chain_path:
-      ensure => 'directory',
-      backup => false,
-      owner  => $owner,
-      group  => $group,
-      mode   => $cert_dir_mode,
-    }
-  }
-
-  if (! defined(File[$ca_path])) {
-    file { $ca_path:
-      ensure => 'directory',
-      backup => false,
-      owner  => $owner,
-      group  => $group,
-      mode   => $cert_dir_mode,
-    }
-  }
-
-  ensure_resource('file', $key_path,
-    {
-      ensure => 'directory',
-      backup => false,
-      owner  => $owner,
-      group  => $group,
-      mode   => $key_dir_mode,
-    },
-  )
 
   if ($merge_key) {
     $substring_mode = $cert_mode[0,-3]
@@ -409,7 +379,7 @@ define certificates::site (
       owner          => $owner,
       group          => $group,
       mode           => $_cert_mode,
-      require        => File[$cert_path],
+      require        => Exec["${name} mkdir ${cert_path}"],
       notify         => $service_notify,
     }
 
@@ -457,28 +427,32 @@ define certificates::site (
       }
     }
   } else {
-    file { "${cert_path}/${cert}":
-      ensure  => $ensure,
-      source  => $cert_source,
-      content => $cert_content,
-      owner   => $owner,
-      group   => $group,
-      mode    => $cert_mode,
-      require => File[$cert_path],
-      notify  => $service_notify,
-    }
+    ensure_resource('file', "${cert_path}/${cert}",
+      {
+        ensure  => $ensure,
+        source  => $cert_source,
+        content => $cert_content,
+        owner   => $owner,
+        group   => $group,
+        mode    => $cert_mode,
+        require => Exec["${name} mkdir ${cert_path}"],
+        notify  => $service_notify,
+      }
+    )
   }
 
-  file { "${key_path}/${key}":
-    ensure  => $ensure,
-    source  => $key_source,
-    content => $key_content,
-    owner   => $owner,
-    group   => $group,
-    mode    => $key_mode,
-    require => File[$key_path],
-    notify  => $service_notify,
-  }
+  ensure_resource('file', "${key_path}/${key}",
+    {
+      ensure  => $ensure,
+      source  => $key_source,
+      content => $key_content,
+      owner   => $owner,
+      group   => $group,
+      mode    => $key_mode,
+      require => Exec["${name} mkdir ${key_path}"],
+      notify  => $service_notify,
+    }
+  )
 
   if ($cert_chain) {
     ensure_resource('file', "${chain_path}/${chain}",
@@ -489,7 +463,6 @@ define certificates::site (
         owner   => $owner,
         group   => $group,
         mode    => $cert_mode,
-        require => File[$chain_path],
         notify  => $service_notify,
       }
     )
@@ -504,7 +477,6 @@ define certificates::site (
         owner   => $owner,
         group   => $group,
         mode    => $cert_mode,
-        require => File[$ca_path],
         notify  => $service_notify,
       }
     )
@@ -525,7 +497,7 @@ define certificates::site (
         owner   => $owner,
         group   => $group,
         mode    => $cert_mode,
-        require => File[$cert_path],
+        require => Exec["${name} mkdir ${cert_path}"],
         notify  => $service_notify,
       }
     )

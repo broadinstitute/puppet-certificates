@@ -30,12 +30,6 @@ describe 'certificates::site', type: :define do
 
         context 'with only cert and key content set' do
           it {
-            is_expected.to contain_file('/etc/ssl/certs').with_ensure('directory')
-          }
-          it {
-            is_expected.to contain_file('/etc/ssl/private').with_ensure('directory')
-          }
-          it {
             is_expected.to contain_file('/etc/ssl/certs/base.example.org.crt').with_group('root')
           }
           it {
@@ -59,12 +53,6 @@ describe 'certificates::site', type: :define do
         end
 
         context 'with only cert and key content set' do
-          it {
-            is_expected.to contain_file('/usr/local/etc/apache24').with_ensure('directory')
-          }
-          it {
-            is_expected.to contain_file('/usr/local/etc/apache24').with_group('wheel')
-          }
           it {
             is_expected.to contain_file('/usr/local/etc/apache24/base.example.org.crt').with_group('wheel')
           }
@@ -90,12 +78,6 @@ describe 'certificates::site', type: :define do
 
         context 'with only cert and key content set' do
           it {
-            is_expected.to contain_file('/etc/ssl/apache2').with_ensure('directory')
-          }
-          it {
-            is_expected.to contain_file('/etc/ssl/apache2').with_group('wheel')
-          }
-          it {
             is_expected.to contain_file('/etc/ssl/apache2/base.example.org.crt').with_group('wheel')
           }
           it {
@@ -119,12 +101,6 @@ describe 'certificates::site', type: :define do
         end
 
         context 'with only cert and key content set' do
-          it {
-            is_expected.to contain_file('/etc/pki/tls/certs').with_ensure('directory')
-          }
-          it {
-            is_expected.to contain_file('/etc/pki/tls/private').with_ensure('directory')
-          }
           it {
             is_expected.to contain_file('/etc/pki/tls/certs/base.example.org.crt').with_group('root')
           }
@@ -1184,18 +1160,6 @@ describe 'certificates::site', type: :define do
         }
       end
 
-      it {
-        is_expected.to contain_file('/etc/ssl/certs').with_ensure('directory')
-      }
-      it {
-        is_expected.to contain_file('/etc/ssl/certs').with_mode('0500')
-      }
-      it {
-        is_expected.to contain_file('/etc/ssl/private').with_ensure('directory')
-      }
-      it {
-        is_expected.to contain_file('/etc/ssl/private').with_mode('0500')
-      }
       it {
         is_expected.to contain_file('/etc/ssl/certs/base.example.org.crt').with_mode('0700')
       }
