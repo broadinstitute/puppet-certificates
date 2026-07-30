@@ -1,15 +1,33 @@
-# Change log
+# Changelog
 
-All notable changes to this project will be documented in this file. The format
-is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this
-project adheres to [Semantic Versioning](http://semver.org).
+## [5.0.0](https://github.com/broadinstitute/puppet-certificates/tree/5.0.0) (2026-07-28)
 
-## [4.0.0](https://github.com/broadinstitute/puppet-certificates/tree/4.0.0) (2023-02-10)
+[Full Changelog](https://github.com/broadinstitute/puppet-certificates/compare/4.0.0...5.0.0)
 
-[Full Changelog](https://github.com/broadinstitute/puppet-certificates/compare/5d8732ab0fdf881256961da31e311343de59d77c...4.0.0)
+**Implemented enhancements:**
 
-### Added
+- feat!: Stop creating directories as file resources
+  [\#20](https://github.com/broadinstitute/puppet-certificates/pull/20)
+  ([coreone](https://github.com/coreone))
 
+**Fixed bugs:**
+
+- fix: Old facts
+  [\#19](https://github.com/broadinstitute/puppet-certificates/pull/19)
+  ([coreone](https://github.com/coreone))
+- fix: networking.ip missing in spec tests
+  [\#17](https://github.com/broadinstitute/puppet-certificates/pull/17)
+  ([coreone](https://github.com/coreone))
+
+## [4.0.0](https://github.com/broadinstitute/puppet-certificates/tree/4.0.0) (2023-02-14)
+
+[Full Changelog](https://github.com/broadinstitute/puppet-certificates/compare/3.0.0...4.0.0)
+
+**Implemented enhancements:**
+
+- Lint and Action fixes
+  [\#4](https://github.com/broadinstitute/puppet-certificates/pull/4)
+  ([coreone](https://github.com/coreone))
 - Rename module from certs to certificates
   [\#1](https://github.com/broadinstitute/puppet-certificates/pull/1)
   ([coreone](https://github.com/coreone))
